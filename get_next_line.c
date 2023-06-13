@@ -6,13 +6,13 @@
 /*   By: skawanis <skawanis@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:12:26 by skawanis          #+#    #+#             */
-/*   Updated: 2023/06/06 21:42:47 by skawanis         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:33:34 by skawanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
-#define BUFFER_SIZE 1
+//#define BUFFER_SIZE 1
 
 void	*ft_memset(void *b, int c, size_t len)
 {

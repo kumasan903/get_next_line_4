@@ -6,7 +6,7 @@
 /*   By: skawanis <skawanis@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:12:42 by skawanis          #+#    #+#             */
-/*   Updated: 2023/06/06 14:37:18 by skawanis         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:22:23 by skawanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,8 @@ char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*get_next_line(int fd);
+#endif
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 4
 #endif
