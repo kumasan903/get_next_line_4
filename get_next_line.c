@@ -6,7 +6,7 @@
 /*   By: skawanis <skawanis@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:12:26 by skawanis          #+#    #+#             */
-/*   Updated: 2023/06/13 16:33:34 by skawanis         ###   ########.fr       */
+/*   Updated: 2023/06/14 03:38:04 by skawanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	read_until_newline(char **memo, int fd)
 		ft_memset(buf, '\0', BUFFER_SIZE + 1);
 		read_return = read(fd, buf, BUFFER_SIZE);
 		if (read_return == 0)
-			break;
+			break ;
 		if (read_return < 0)
 		{
 			free(buf);
@@ -55,6 +55,7 @@ int	read_until_newline(char **memo, int fd)
 	}
 	if (read_return == 0 && ft_strclen_s(*memo, '\0') == 0)
 	{
+		free(*memo);
 		*memo = NULL;
 	}
 	free(buf);
