@@ -6,13 +6,12 @@
 /*   By: skawanis <skawanis@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:12:26 by skawanis          #+#    #+#             */
-/*   Updated: 2023/06/19 18:45:34 by skawanis         ###   ########.fr       */
+/*   Updated: 2023/06/20 03:11:27 by skawanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
-//#define BUFFER_SIZE 1
 
 size_t	ft_min(size_t a, size_t b)
 {
@@ -20,21 +19,6 @@ size_t	ft_min(size_t a, size_t b)
 		return (a);
 	else
 		return (b);
-}
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	size_t			i;
-	unsigned char	*new_b;
-
-	new_b = (unsigned char *)b;
-	i = 0;
-	while (i < len)
-	{
-		new_b[i] = (unsigned char)c;
-		i++;
-	}
-	return (b);
 }
 
 int	read_until_newline(char **memo, int fd)
@@ -47,7 +31,6 @@ int	read_until_newline(char **memo, int fd)
 	buf[BUFFER_SIZE] = '\0';
 	while (!*memo || !ft_strchr(*memo, '\n'))
 	{
-		ft_memset(buf, '\0', BUFFER_SIZE + 1);
 		read_return = read(fd, buf, BUFFER_SIZE);
 		if (read_return == 0)
 			break ;
@@ -56,10 +39,10 @@ int	read_until_newline(char **memo, int fd)
 			free(buf);
 			return (1);
 		}
+		buf[read_return] = '\0';
 		tmp = ft_strjoin(*memo, buf);
 		free(*memo);
 		*memo = tmp;
-//		printf("memo:%s\nbuf :%s\nread_return:%ld\n", *memo, buf, read_return);
 	}
 	if (read_return == 0 && ft_strclen_s(*memo, '\0') == 0)
 	{
@@ -78,9 +61,7 @@ char	*get_next_line(int fd)
 
 	if (memo && ft_strchr(memo, '\n'))
 	{
-//		puts("test1");
 		line = ft_strcdup(memo, '\n');
-		// MIN(FT_STRLEN, FT_STRCLEN + 1) ???
 		tmp = ft_strcdup(memo + ft_min(ft_strclen_s(memo, '\0'), ft_strclen_s(memo, '\n') + 1), '\0');
 		free(memo);
 		memo = tmp;
@@ -88,7 +69,6 @@ char	*get_next_line(int fd)
 	}
 	else
 	{
-//		puts("test2");
 		if (read_until_newline(&memo, fd) == 1)
 			return (NULL);
 		line = ft_strcdup(memo, '\n');
