@@ -6,13 +6,21 @@
 /*   By: skawanis <skawanis@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:12:26 by skawanis          #+#    #+#             */
-/*   Updated: 2023/06/14 03:38:04 by skawanis         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:52:03 by skawanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 //#define BUFFER_SIZE 1
+
+size_t	ft_min(size_t a, size_t b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}
 
 void	*ft_memset(void *b, int c, size_t len)
 {
@@ -73,7 +81,7 @@ char	*get_next_line(int fd)
 //		puts("test1");
 		line = ft_strcdup(memo, '\n');
 		// MIN(FT_STRLEN, FT_STRCLEN + 1) ???
-		tmp = ft_strcdup(memo + ft_strclen_s(memo, '\n') + 1, '\0');
+		tmp = ft_strcdup(memo + ft_min(ft_strclen_s(memo, '\0'), ft_strclen_s(memo, '\n') + 1), '\0');
 		free(memo);
 		memo = tmp;
 		return (line);
