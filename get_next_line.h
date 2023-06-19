@@ -6,7 +6,7 @@
 /*   By: skawanis <skawanis@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:12:42 by skawanis          #+#    #+#             */
-/*   Updated: 2023/06/13 23:25:57 by skawanis         ###   ########.fr       */
+/*   Updated: 2023/06/20 04:00:56 by skawanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4
+#  define BUFFER_SIZE 128
 # endif
 
 char	*ft_strchr(const char *s, int c);
