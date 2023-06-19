@@ -6,7 +6,7 @@
 /*   By: skawanis <skawanis@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:12:26 by skawanis          #+#    #+#             */
-/*   Updated: 2023/06/20 03:11:27 by skawanis         ###   ########.fr       */
+/*   Updated: 2023/06/20 03:14:31 by skawanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ char	*get_next_line(int fd)
 	if (memo && ft_strchr(memo, '\n'))
 	{
 		line = ft_strcdup(memo, '\n');
-		tmp = ft_strcdup(memo + ft_min(ft_strclen_s(memo, '\0'), ft_strclen_s(memo, '\n') + 1), '\0');
+		tmp = ft_strcdup(memo + ft_min(ft_strclen_s(memo, '\0'),
+					ft_strclen_s(memo, '\n') + 1), '\0');
 		free(memo);
 		memo = tmp;
 		return (line);
