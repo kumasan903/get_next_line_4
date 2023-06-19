@@ -6,12 +6,21 @@
 /*   By: skawanis <skawanis@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 23:12:26 by skawanis          #+#    #+#             */
-/*   Updated: 2023/06/20 03:14:31 by skawanis         ###   ########.fr       */
+/*   Updated: 2023/06/20 03:52:00 by skawanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+
+void	free_and_null(char **ptr)
+{
+	if (*ptr != NULL)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
 
 size_t	ft_min(size_t a, size_t b)
 {
@@ -45,12 +54,22 @@ int	read_until_newline(char **memo, int fd)
 		*memo = tmp;
 	}
 	if (read_return == 0 && ft_strclen_s(*memo, '\0') == 0)
-	{
-		free(*memo);
-		*memo = NULL;
-	}
+		free_and_null(memo);
 	free(buf);
 	return (0);
+}
+
+char	*cut_memo(char **memo)
+{
+	char	*line;
+	char	*tmp;
+
+	line = ft_strcdup(*memo, '\n');
+	tmp = ft_strcdup(*memo + ft_min(ft_strclen_s(*memo, '\0'),
+				ft_strclen_s(*memo, '\n') + 1), '\0');
+	free(*memo);
+	*memo = tmp;
+	return (line);
 }
 
 char	*get_next_line(int fd)
@@ -61,11 +80,7 @@ char	*get_next_line(int fd)
 
 	if (memo && ft_strchr(memo, '\n'))
 	{
-		line = ft_strcdup(memo, '\n');
-		tmp = ft_strcdup(memo + ft_min(ft_strclen_s(memo, '\0'),
-					ft_strclen_s(memo, '\n') + 1), '\0');
-		free(memo);
-		memo = tmp;
+		line = cut_memo(&memo);
 		return (line);
 	}
 	else
@@ -74,10 +89,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		line = ft_strcdup(memo, '\n');
 		if (ft_strclen_s(memo, '\0') == ft_strclen_s(line, '\0'))
-		{
-			free (memo);
-			memo = NULL;
-		}
+			free_and_null(&memo);
 		if (memo)
 		{
 			tmp = ft_strcdup(memo + ft_strclen_s(memo, '\n') + 1, '\0');
